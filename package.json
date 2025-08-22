@@ -1,0 +1,21 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "WhatsApp OTP Lock and Mass Report Tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rishi Heart Maker",
+  "license": "ISC",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.4.0",
+    "gradient-string": "^2.0.2",
+    "pino": "^8.15.0",
+    "prompt-sync": "^4.2.0",
+    "node-fetch": "^3.3.2",
+    "https-proxy-agent": "^7.0.5"
+  }
+}
