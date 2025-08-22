@@ -12,7 +12,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 ### General Installation (for most Linux distributions)
 1. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
 2. Navigate to the repository: `cd ripper-samhax-wa`
-3. Install Python dependencies: `pip install requests PySocks`
+3. Install Python dependencies: `pip install requests PySocks --break-system-packages`
 4. Add your proxies to `whatsapp_mass_report.py`.
 
 ### Kali Linux
@@ -21,7 +21,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 3. Install python3 and pip: `sudo apt install python3 python3-pip -y`
 4. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
 5. Navigate to the repository: `cd ripper-samhax-wa`
-6. Install Python dependencies: `pip install requests PySocks`
+6. Install Python dependencies: `pip install requests PySocks --break-system-packages`
 7. Add your proxies to `whatsapp_mass_report.py`.
 
 ### Termux
@@ -30,7 +30,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 3. Install python: `pkg install python -y`
 4. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
 5. Navigate to the repository: `cd ripper-samhax-wa`
-6. Install Python dependencies: `pip install requests PySocks`
+6. Install Python dependencies: `pip install requests PySocks --break-system-packages`
 7. Add your proxies to `whatsapp_mass_report.py`.
 
 ## Usage
