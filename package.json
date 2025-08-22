@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["whatsapp", "otp", "mass-report"],
-  "author": "Rishi Heart Maker",
+  "author": "Rishi Ripper",
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "^6.6.0",
