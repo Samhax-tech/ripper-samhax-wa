@@ -8,14 +8,38 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 - Proxy Rotation: Changes IP every 5 seconds.
 
 ## Installation
+
+### General Installation (for most Linux distributions)
 1. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
-2. Install Node.js dependencies: `npm install`
-3. Add proxies to scripts.
-4. Run: `node src/index.js` (or respective file).
+2. Navigate to the repository: `cd ripper-samhax-wa`
+3. Install Python dependencies: `pip install requests PySocks`
+4. Add your proxies to `whatsapp_mass_report.py`.
+
+### Kali Linux
+1. Update package list: `sudo apt update`
+2. Install git: `sudo apt install git -y`
+3. Install python3 and pip: `sudo apt install python3 python3-pip -y`
+4. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
+5. Navigate to the repository: `cd ripper-samhax-wa`
+6. Install Python dependencies: `pip install requests PySocks`
+7. Add your proxies to `whatsapp_mass_report.py`.
+
+### Termux
+1. Update package list: `pkg update && pkg upgrade -y`
+2. Install git: `pkg install git -y`
+3. Install python: `pkg install python -y`
+4. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
+5. Navigate to the repository: `cd ripper-samhax-wa`
+6. Install Python dependencies: `pip install requests PySocks`
+7. Add your proxies to `whatsapp_mass_report.py`.
 
 ## Usage
-- Enter country code and number when prompted.
-- Scripts automate the process.
+
+To run the Python script:
+1. Navigate to the repository directory: `cd ripper-samhax-wa`
+2. Run the script: `python3 whatsapp_mass_report.py`
+3. Enter the username `Samhax` and password `sam12` when prompted.
+4. Follow the on-screen prompts to enter the target number, report count, and delay.
 
 ## Legal Note
 Unauthorized use is illegal. For educational purposes only.
