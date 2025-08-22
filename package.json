@@ -1,5 +1,5 @@
 {
-  "name": "nodejs",
+  "name": "ripper-samhax-wa",
   "version": "1.0.0",
   "description": "WhatsApp OTP Lock and Mass Report Tool",
   "main": "index.js",
@@ -7,11 +7,11 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["whatsapp", "otp", "mass-report"],
   "author": "Rishi Heart Maker",
   "license": "ISC",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.4.0",
+    "@whiskeysockets/baileys": "^6.6.0",
     "gradient-string": "^2.0.2",
     "pino": "^8.15.0",
     "prompt-sync": "^4.2.0",
