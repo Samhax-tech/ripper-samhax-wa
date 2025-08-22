@@ -39,7 +39,7 @@ To run the Python script:
 1. Navigate to the repository directory: `cd ripper-samhax-wa`
 2. Run the script: `python3 whatsapp_mass_report.py`
 
-## To starting this tool contact my owner [Samhax the ripper](https://t.me/@samhax_official)
+## To starting this tool contact my owner [Samhax the ripper](https://t.me/samhax_official)
  
 ## Legal Note
 Unauthorized use is illegal. For educational purposes only.
