@@ -8,7 +8,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 - Proxy Rotation: Changes IP every 5 seconds.
 
 ## Installation
-1. Clone repo: `git clone [https://github.com/Samhax-tech/ripper-samhax-wa.git]`
+1. Clone repo: `git clone https://github.com/Samhax-tech/ripper-samhax-wa.git`
 2. Install Node.js dependencies: `npm install`
 3. Add proxies to scripts.
 4. Run: `node src/index.js` (or respective file).
