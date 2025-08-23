@@ -155,7 +155,7 @@ def mass_report(target, report_count, delay, num_threads=5):
             future.result()
 
 if __name__ == "__main__":
-    target = input("Enter target number (e.g., +1234567890): ")
+    target = input("Give ripper a target number (e.g., +91346258900): ")
     try:
         report_count = int(input("Enter number of reports to send (e.g., 50): "))
         delay = float(input("Enter delay between reports in seconds (e.g., 0.5 for faster, 5 for slower): "))
