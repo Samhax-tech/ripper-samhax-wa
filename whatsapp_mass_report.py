@@ -119,11 +119,22 @@ def get_proxy():
     proxy_url = proxies[current_proxy_index]
     current_proxy_index = (current_proxy_index + 1) % len(proxies)
     
-    # requests library automatically handles http, https, socks4, socks5 prefixes
-    return {
-        'http': proxy_url,
-        'https': proxy_url
-    }
+    # Add authentication to the proxy URL if username and password are provided
+    username = "Samhax"
+    password = "Ripper"
+    if username and password:
+        # Split the proxy_url to insert credentials
+        protocol, address = proxy_url.split("://")
+        authenticated_proxy_url = f"{protocol}://{username}:{password}@{address}"
+        return {
+            'http': authenticated_proxy_url,
+            'https': authenticated_proxy_url
+        }
+    else:
+        return {
+            'http': proxy_url,
+            'https': proxy_url
+        }
 
 def send_report(target, proxy, script, report_num):
     try:
@@ -155,7 +166,7 @@ def mass_report(target, report_count, delay, num_threads=5):
             future.result()
 
 if __name__ == "__main__":
-    target = input("Give ripper a target number (e.g., +91346258900): ")
+    target = input("Enter target number (e.g., +1234567890): ")
     try:
         report_count = int(input("Enter number of reports to send (e.g., 50): "))
         delay = float(input("Enter delay between reports in seconds (e.g., 0.5 for faster, 5 for slower): "))
