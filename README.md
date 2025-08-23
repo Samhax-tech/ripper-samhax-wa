@@ -39,7 +39,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 To run the Python script:
 1. Navigate to the repository directory: `cd ripper-samhax-wa`
 2. Run the script: `python3 whatsapp_mass_report.py`
-3. Contact owner on Telegram to get the username and password: [Samhax the Ripper](https://t.me/@samhax_official)
+3. Contact owner on Telegram to get the username and password: [Samhax the Ripper](https://t.me/samhax_official)
 4. Follow the on-screen prompts to enter the target number, report count, delay, and **number of concurrent threads**.
 
 ## Legal Note
