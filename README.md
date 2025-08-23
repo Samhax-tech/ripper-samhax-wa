@@ -6,6 +6,7 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 - OTP Lock: Floods registration requests to lock a number.
 - Mass Report: Sends ban scripts to flag the account.
 - Proxy Rotation: Changes IP every 5 seconds.
+- **Multithreaded Reporting**: Send multiple reports concurrently for increased speed.
 
 ## Installation
 
@@ -38,8 +39,8 @@ A collection of scripts to lock and report WhatsApp numbers, aiming for a perman
 To run the Python script:
 1. Navigate to the repository directory: `cd ripper-samhax-wa`
 2. Run the script: `python3 whatsapp_mass_report.py`
+3. Contact @samhax_official on Telegram to get the username and password: https://t.me/@samhax_official
+4. Follow the on-screen prompts to enter the target number, report count, delay, and **number of concurrent threads**.
 
-## To starting this tool contact my owner [Samhax the ripper](https://t.me/samhax_official)
- 
 ## Legal Note
 Unauthorized use is illegal. For educational purposes only.
